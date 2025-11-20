@@ -1,0 +1,69 @@
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                  KawaiiRoyale Arena Configuration                ║
+# ║            Define your Battle Royale arenas here                 ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Example arena configuration
+# To create a new arena, use: /kawaii setup <mode> <arena-name>
+
+arenas:
+  example_arena:
+    display-name: "Example Arena"
+    enabled: true
+    max-players: 100
+
+    # Center point of the arena (for zone calculations)
+    center:
+      world: world
+      x: 0.0
+      y: 64.0
+      z: 0.0
+      yaw: 0.0
+      pitch: 0.0
+
+    # Lobby location (where players return after game)
+    lobby:
+      world: world
+      x: 0.0
+      y: 64.0
+      z: 50.0
+      yaw: 180.0
+      pitch: 0.0
+
+    # Spawn locations (players will be randomly distributed)
+    spawns:
+      0:
+        world: world
+        x: 10.0
+        y: 64.0
+        z: 10.0
+        yaw: 0.0
+        pitch: 0.0
+      1:
+        world: world
+        x: -10.0
+        y: 64.0
+        z: 10.0
+        yaw: 90.0
+        pitch: 0.0
+      2:
+        world: world
+        x: -10.0
+        y: 64.0
+        z: -10.0
+        yaw: 180.0
+        pitch: 0.0
+      3:
+        world: world
+        x: 10.0
+        y: 64.0
+        z: -10.0
+        yaw: 270.0
+        pitch: 0.0
+
+# Add more arenas as needed
+# Each arena should have:
+# - A unique name
+# - Center point
+# - Lobby location
+# - Multiple spawn locations (recommended: at least 20 for 100 players)

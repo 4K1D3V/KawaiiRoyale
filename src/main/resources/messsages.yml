@@ -1,0 +1,98 @@
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                    KawaiiRoyale Messages                         ║
+# ║           Supports MiniMessage formatting                        ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Plugin prefix
+prefix: "<gradient:#ff69b4:#ff1493>[KawaiiRoyale]</gradient> "
+
+# Queue messages
+queue:
+  joined: "<green>You joined the queue! Position: <position>"
+  left: "<yellow>You left the queue."
+  already-in-queue: "<red>You are already in the queue!"
+  already-in-game: "<red>You are already in a game!"
+  full: "<red>The queue is full! Please try again later."
+
+# Game messages
+game:
+  starting: "<yellow>Game starting in <time> seconds..."
+  started: "<green>✦ Game has started! Good luck! ✦"
+  grace-period: "<yellow>⚠ Grace period active! PvP disabled for <time> seconds"
+  grace-end: "<red>⚠ Grace period ended! PvP is now enabled!"
+
+  joined: "<green><player> joined the game! (<current>/<max>)"
+  left: "<red><player> left the game!"
+
+  elimination: "<red>💀 You have been eliminated!"
+  eliminated-by: "<red><victim> was eliminated by <gold><killer></gold>! (<alive> remaining)"
+  eliminated: "<red><player> was eliminated! (<alive> remaining)"
+
+  victory: "<gradient:#ffd700:#ffed4e>🏆 VICTORY ROYALE! 🏆</gradient>"
+  victory-message: "<gold><player></gold> <yellow>won the Battle Royale with <kills> kills!"
+
+  top-players: "<gold>═══ Top 3 Players ═══"
+  top-player-line: "<yellow><position>. <player> - <kills> kills"
+
+  no-winners: "<yellow>No winners this round!"
+  rewards-earned: "<green>You earned rewards!"
+
+# Zone messages
+zone:
+  shrinking: "<yellow>⚠ The zone is shrinking!"
+  shrink-stopped: "<green>✓ Zone has stopped shrinking!"
+  warning: "<red>⚠ Get to the safe zone in <time> seconds!"
+  damage: "<gradient:#ff0000:#ff6666>⚠ You're outside the safe zone! Taking damage!</gradient>"
+
+# Stats messages
+stats:
+  header: "<gradient:#ff69b4:#ff1493>═══ <player>'s Stats ═══</gradient>"
+  kills: "<gray>Kills: <white><kills>"
+  deaths: "<gray>Deaths: <white><deaths>"
+  wins: "<gray>Wins: <white><wins>"
+  games: "<gray>Games Played: <white><games>"
+  kd: "<gray>K/D Ratio: <white><kd>"
+  winrate: "<gray>Win Rate: <white><winrate>%"
+
+# Leaderboard messages
+leaderboard:
+  header: "<gold>═══ Leaderboard - <type> ═══"
+  entry: "<yellow><position>. <player> - <value>"
+  footer: "<gray>Use /lb [type] to view different stats"
+
+# Error messages
+error:
+  no-permission: "<red>You don't have permission to do that!"
+  player-only: "<red>Only players can use this command!"
+  not-in-game: "<red>You are not in a game!"
+  invalid-arena: "<red>Invalid arena!"
+  no-arenas: "<red>No arenas available!"
+  arena-not-found: "<red>Arena not found!"
+
+# Admin messages
+admin:
+  reload-success: "<green>Configuration reloaded successfully!"
+  reload-fail: "<red>Failed to reload configuration!"
+  arena-created: "<green>Arena '<arena>' created successfully!"
+  arena-deleted: "<green>Arena '<arena>' deleted!"
+  arena-saved: "<green>Arena saved!"
+  lobby-set: "<green>Lobby location set!"
+  spawn-added: "<green>Spawn location added! Total: <count>"
+  center-set: "<green>Arena center set!"
+
+# Command help
+help:
+  main: |
+    <gold>═══ KawaiiRoyale Commands ═══
+    <yellow>/br <gray>- Join Battle Royale
+    <yellow>/rs <gray>- Join Resurgence
+    <yellow>/leave <gray>- Leave current game
+    <yellow>/stats [player] <gray>- View statistics
+    <yellow>/lb [type] <gray>- View leaderboards
+
+  admin: |
+    <gold>═══ Admin Commands ═══
+    <yellow>/kawaii setup <mode> <name> <gray>- Setup arena
+    <yellow>/kawaii arena <action> <gray>- Manage arenas
+    <yellow>/kawaii forcestart <gray>- Force start game
+    <yellow>/kawaii reload <gray>- Reload configuration

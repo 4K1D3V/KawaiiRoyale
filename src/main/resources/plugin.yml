@@ -1,0 +1,119 @@
+name: KawaiiRoyale
+version: '${project.version}'
+main: dev.oumaimaa.Main
+api-version: '1.21'
+author: oumaimaa
+description: Advanced Battle Royale plugin with modern features
+website: https://github.com/4K1D3V/KawaiiRoyale
+
+# Soft dependencies
+softdepend:
+  - PlaceholderAPI
+  - LuckPerms
+  - Vault
+  - TerraformGenerator
+
+# Permissions
+permissions:
+  kawaii.*:
+    description: Grants all KawaiiRoyale permissions
+    children:
+      kawaii.play: true
+      kawaii.admin: true
+
+  kawaii.play:
+    description: Allows player to join games
+    default: true
+
+  kawaii.admin:
+    description: Grants admin access
+    default: op
+    children:
+      kawaii.admin.setup: true
+      kawaii.admin.arena: true
+      kawaii.admin.force: true
+      kawaii.admin.reload: true
+
+  kawaii.admin.setup:
+    description: Allows setting up lobbies and arenas
+    default: op
+
+  kawaii.admin.arena:
+    description: Manage arenas
+    default: op
+
+  kawaii.admin.force:
+    description: Force start games
+    default: op
+
+  kawaii.admin.reload:
+    description: Reload configuration
+    default: op
+
+  kawaii.vip:
+    description: VIP perks (priority queue, cosmetics)
+    default: false
+
+  kawaii.bypass:
+    description: Bypass queue restrictions
+    default: op
+
+# Commands
+commands:
+  kawaii:
+    description: Main KawaiiRoyale command
+    usage: /kawaii
+    aliases: [kr, royale, br]
+
+  battleroyale:
+    description: Join Battle Royale mode
+    usage: /battleroyale
+    aliases: [br]
+
+  resurgence:
+    description: Join Resurgence mode
+    usage: /resurgence
+    aliases: [rs]
+
+  leave:
+    description: Leave current match
+    usage: /leave
+    aliases: [quit]
+
+  spectate:
+    description: Spectate a match
+    usage: /spectate [player]
+
+  stats:
+    description: View your statistics
+    usage: /stats [player]
+
+  leaderboard:
+    description: View leaderboards
+    usage: /leaderboard [type]
+    aliases: [lb, top]
+
+  achievements:
+    description: View achievements
+    usage: /achievements
+    aliases: [achieve]
+
+  cosmetics:
+    description: Open cosmetics shop
+    usage: /cosmetics [type]
+    aliases: [cosmetic, shop]
+
+  battlepass:
+    description: View battle pass
+    usage: /battlepass
+    aliases: [bp, pass]
+
+  challenges:
+    description: View daily challenges
+    usage: /challenges
+    aliases: [challenge, daily]
+
+  crates:
+    description: View and open crates
+    usage: /crates
+    aliases: [crate]

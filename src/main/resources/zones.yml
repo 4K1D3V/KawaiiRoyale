@@ -1,0 +1,139 @@
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                   KawaiiRoyale Zone Configuration                ║
+# ║            Advanced zone shrinking configurations                ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Default zone settings (can be overridden per arena)
+default:
+  # Initial zone radius
+  initial-radius: 1000
+
+  # Final zone radius
+  final-radius: 50
+
+  # Shrink interval (seconds between shrinks)
+  shrink-interval: 120
+
+  # Number of shrink stages
+  shrink-stages: 8
+
+  # Damage per tick outside zone
+  damage-per-tick: 2
+
+  # Damage interval (ticks)
+  damage-interval: 20
+
+  # Warning time before shrink (seconds)
+  warning-time: 30
+
+# Zone shrink algorithms
+# LINEAR: Same size reduction each stage
+# EXPONENTIAL: Faster shrinking at the start
+# ADAPTIVE: Adjusts based on alive players
+shrink-algorithm: ADAPTIVE
+
+# Stage-specific configurations (optional)
+# Override default settings for specific shrink stages
+stages:
+  1:
+    duration: 180  # First stage lasts 3 minutes
+    target-radius: 800
+    damage-per-tick: 1
+
+  2:
+    duration: 150
+    target-radius: 600
+    damage-per-tick: 2
+
+  3:
+    duration: 120
+    target-radius: 400
+    damage-per-tick: 3
+
+  4:
+    duration: 100
+    target-radius: 250
+    damage-per-tick: 4
+
+  5:
+    duration: 80
+    target-radius: 150
+    damage-per-tick: 5
+
+  6:
+    duration: 60
+    target-radius: 100
+    damage-per-tick: 6
+
+  7:
+    duration: 40
+    target-radius: 75
+    damage-per-tick: 8
+
+  8:
+    duration: 30
+    target-radius: 50
+    damage-per-tick: 10
+
+# Visual effects
+visuals:
+  # Show particle border
+  show-particles: true
+
+  # Particle type: DUST, FLAME, REDSTONE
+  particle-type: DUST
+
+  # Particle color (RGB)
+  particle-color:
+    red: 255
+    green: 0
+    blue: 0
+
+  # Density (degrees between particles)
+  particle-density: 5
+
+  # Particle height above ground
+  particle-height: 1
+
+# Sound effects
+sounds:
+  # Play sound when zone starts shrinking
+  shrink-start:
+    enabled: true
+    sound: BLOCK_BEACON_ACTIVATE
+    volume: 1.0
+    pitch: 0.8
+
+  # Play sound when taking zone damage
+  zone-damage:
+    enabled: true
+    sound: BLOCK_FIRE_AMBIENT
+    volume: 0.5
+    pitch: 1.0
+
+  # Warning sound before shrink
+  warning:
+    enabled: true
+    sound: BLOCK_NOTE_BLOCK_PLING
+    volume: 1.0
+    pitch: 0.5
+
+# Adaptive algorithm settings
+adaptive:
+  # Adjust shrink speed based on alive players
+  enabled: true
+
+  # Speed up shrinking if players > threshold
+  speed-up-threshold: 50
+  speed-up-multiplier: 1.5
+
+  # Slow down shrinking if players < threshold
+  slow-down-threshold: 10
+  slow-down-multiplier: 0.75
+
+# Arena-specific overrides (optional)
+arena-overrides:
+  example_arena:
+    initial-radius: 1500
+    final-radius: 75
+    shrink-interval: 150

@@ -1,0 +1,250 @@
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                    KawaiiRoyale Loot Configuration               ║
+# ║            Customize loot tables and drop rates                  ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Loot tier distribution (percentage chance)
+tier-distribution:
+  common: 50      # 50% chance
+  rare: 30        # 30% chance
+  epic: 15        # 15% chance
+  legendary: 5    # 5% chance
+
+# Items per tier with weights (higher = more common)
+loot-tables:
+  common:
+    - material: WOODEN_SWORD
+      amount: 1
+      weight: 30
+
+    - material: WOODEN_AXE
+      amount: 1
+      weight: 25
+
+    - material: BOW
+      amount: 1
+      weight: 20
+      enchantments:
+        ARROW_DAMAGE: 1
+
+    - material: ARROW
+      amount: 16
+      weight: 40
+
+    - material: BREAD
+      amount: 5
+      weight: 35
+
+    - material: COOKED_BEEF
+      amount: 3
+      weight: 30
+
+    - material: LEATHER_HELMET
+      amount: 1
+      weight: 15
+
+    - material: LEATHER_CHESTPLATE
+      amount: 1
+      weight: 15
+
+    - material: LEATHER_LEGGINGS
+      amount: 1
+      weight: 15
+
+    - material: LEATHER_BOOTS
+      amount: 1
+      weight: 15
+
+  rare:
+    - material: IRON_SWORD
+      amount: 1
+      weight: 30
+      enchantments:
+        DAMAGE_ALL: 1
+
+    - material: IRON_AXE
+      amount: 1
+      weight: 25
+
+    - material: CROSSBOW
+      amount: 1
+      weight: 20
+      enchantments:
+        QUICK_CHARGE: 1
+
+    - material: ARROW
+      amount: 32
+      weight: 30
+
+    - material: GOLDEN_APPLE
+      amount: 2
+      weight: 15
+
+    - material: IRON_HELMET
+      amount: 1
+      weight: 20
+
+    - material: IRON_CHESTPLATE
+      amount: 1
+      weight: 20
+
+    - material: IRON_LEGGINGS
+      amount: 1
+      weight: 20
+
+    - material: IRON_BOOTS
+      amount: 1
+      weight: 20
+
+    - material: SHIELD
+      amount: 1
+      weight: 15
+
+  epic:
+    - material: DIAMOND_SWORD
+      amount: 1
+      weight: 25
+      enchantments:
+        DAMAGE_ALL: 2
+        FIRE_ASPECT: 1
+
+    - material: DIAMOND_AXE
+      amount: 1
+      weight: 20
+      enchantments:
+        DAMAGE_ALL: 2
+
+    - material: TRIDENT
+      amount: 1
+      weight: 10
+      enchantments:
+        LOYALTY: 2
+
+    - material: BOW
+      amount: 1
+      weight: 15
+      enchantments:
+        ARROW_DAMAGE: 3
+        ARROW_FIRE: 1
+
+    - material: ENCHANTED_GOLDEN_APPLE
+      amount: 1
+      weight: 5
+
+    - material: DIAMOND_HELMET
+      amount: 1
+      weight: 15
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 2
+
+    - material: DIAMOND_CHESTPLATE
+      amount: 1
+      weight: 15
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 2
+
+    - material: DIAMOND_LEGGINGS
+      amount: 1
+      weight: 15
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 2
+
+    - material: DIAMOND_BOOTS
+      amount: 1
+      weight: 15
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 2
+        PROTECTION_FALL: 2
+
+  legendary:
+    - material: NETHERITE_SWORD
+      amount: 1
+      weight: 20
+      enchantments:
+        DAMAGE_ALL: 3
+        FIRE_ASPECT: 2
+        SWEEPING_EDGE: 2
+
+    - material: NETHERITE_AXE
+      amount: 1
+      weight: 15
+      enchantments:
+        DAMAGE_ALL: 3
+        MENDING: 1
+
+    - material: TRIDENT
+      amount: 1
+      weight: 10
+      enchantments:
+        LOYALTY: 3
+        RIPTIDE: 2
+
+    - material: BOW
+      amount: 1
+      weight: 10
+      enchantments:
+        ARROW_DAMAGE: 4
+        ARROW_INFINITE: 1
+        ARROW_FIRE: 1
+
+    - material: TOTEM_OF_UNDYING
+      amount: 1
+      weight: 5
+
+    - material: ENCHANTED_GOLDEN_APPLE
+      amount: 3
+      weight: 8
+
+    - material: NETHERITE_HELMET
+      amount: 1
+      weight: 10
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 3
+        MENDING: 1
+
+    - material: NETHERITE_CHESTPLATE
+      amount: 1
+      weight: 10
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 3
+        MENDING: 1
+
+    - material: NETHERITE_LEGGINGS
+      amount: 1
+      weight: 10
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 3
+        MENDING: 1
+
+    - material: NETHERITE_BOOTS
+      amount: 1
+      weight: 10
+      enchantments:
+        PROTECTION_ENVIRONMENTAL: 3
+        PROTECTION_FALL: 3
+        MENDING: 1
+
+# Chest loot settings
+chests:
+  # How many items per chest
+  items-per-chest: 3
+
+  # Respawn time in seconds (0 = no respawn)
+  respawn-time: 30
+
+  # Glow effect on chests
+  glow-effect: true
+
+# Airdrop settings
+airdrops:
+  # Items per airdrop
+  items-per-drop: 5
+
+  # Minimum tier for airdrops
+  min-tier: RARE
+
+  # Announce airdrops
+  announce: true
+
+  # Smoke particle duration (seconds)
+  smoke-duration: 60
