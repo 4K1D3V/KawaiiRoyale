@@ -1,4 +1,4 @@
-# 🎮 KawaiiRoyale v2.0
+# 🎮 KawaiiRoyale v2.0 BETA
 
 <div align="center">
 
