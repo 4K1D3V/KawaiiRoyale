@@ -36,7 +36,7 @@ public class KawaiiRoyalePlaceholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.0.1.1";
+        return "2.0";
     }
 
     @Override
@@ -190,4 +190,5 @@ public class KawaiiRoyalePlaceholder extends PlaceholderExpansion {
         }
         return false;
     }
+
 }
