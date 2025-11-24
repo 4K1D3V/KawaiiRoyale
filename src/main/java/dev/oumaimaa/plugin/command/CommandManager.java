@@ -40,6 +40,23 @@ public class CommandManager {
         Objects.requireNonNull(plugin.getCommand("crates")).setExecutor(new CratesCommand());
     }
 
+    private static class AchievementsCommand implements CommandExecutor {
+        @Override
+        public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
+                                 @NotNull String label, @NotNull String @NotNull [] args) {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage("Only players can use this command!");
+                return true;
+            }
+
+            // TODO: Open achievements GUI
+            player.sendMessage(Component.text("Achievements GUI coming soon!")
+                    .color(NamedTextColor.YELLOW));
+
+            return true;
+        }
+    }
+
     private class MainCommand implements CommandExecutor {
         @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
@@ -340,23 +357,6 @@ public class CommandManager {
         }
     }
 
-    private static class AchievementsCommand implements CommandExecutor {
-        @Override
-        public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
-                                 @NotNull String label, @NotNull String @NotNull [] args) {
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("Only players can use this command!");
-                return true;
-            }
-
-            // TODO: Open achievements GUI
-            player.sendMessage(Component.text("Achievements GUI coming soon!")
-                    .color(NamedTextColor.YELLOW));
-
-            return true;
-        }
-    }
-
     private class CosmeticsCommand implements CommandExecutor {
         @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
@@ -370,7 +370,8 @@ public class CommandManager {
             if (args.length > 0) {
                 try {
                     type = CosmeticType.valueOf(args[0].toUpperCase());
-                } catch (IllegalArgumentException ignored) {}
+                } catch (IllegalArgumentException ignored) {
+                }
             }
 
             plugin.getGuiManager().openCosmeticsShop(player, type);

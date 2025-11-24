@@ -1,9 +1,9 @@
 package dev.oumaimaa.plugin.manager;
 
 import dev.oumaimaa.Main;
+import dev.oumaimaa.plugin.constant.GameMode;
 import dev.oumaimaa.plugin.skeleton.Arena;
 import dev.oumaimaa.plugin.skeleton.Game;
-import dev.oumaimaa.plugin.constant.GameMode;
 import dev.oumaimaa.plugin.skeleton.GamePlayer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

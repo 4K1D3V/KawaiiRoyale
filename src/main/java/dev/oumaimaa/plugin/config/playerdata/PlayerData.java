@@ -5,7 +5,11 @@ import dev.oumaimaa.plugin.constant.CrateType;
 
 import java.util.*;
 
+/**
+ * Player data container with all statistics and progress
+ */
 public class PlayerData {
+
     private final UUID uuid;
     private String name;
     private PlayerStatistics statistics;
@@ -19,6 +23,9 @@ public class PlayerData {
     private int dailyChallengesCompleted;
     private long lastDailyChallengeReset;
     private Map<CrateType, Integer> ownedCrates;
+    private final Map<String, Integer> challengeProgress;
+    private long lastSeen;
+    private long totalPlaytime;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
@@ -34,6 +41,9 @@ public class PlayerData {
         this.dailyChallengesCompleted = 0;
         this.lastDailyChallengeReset = System.currentTimeMillis();
         this.ownedCrates = new EnumMap<>(CrateType.class);
+        this.challengeProgress = new HashMap<>();
+        this.lastSeen = System.currentTimeMillis();
+        this.totalPlaytime = 0;
     }
 
     public UUID getUuid() {
@@ -61,15 +71,23 @@ public class PlayerData {
     }
 
     public void setCoins(int coins) {
-        this.coins = coins;
+        this.coins = Math.max(0, coins);
     }
 
     public void addCoins(int amount) {
         this.coins += amount;
     }
 
-    public void removeCoins(int amount) {
-        this.coins = Math.max(0, this.coins - amount);
+    public boolean removeCoins(int amount) {
+        if (this.coins >= amount) {
+            this.coins -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasCoins(int amount) {
+        return this.coins >= amount;
     }
 
     public Set<String> getUnlockedAchievements() {
@@ -116,6 +134,10 @@ public class PlayerData {
         equippedCosmetics.put(type, cosmeticId);
     }
 
+    public void unequipCosmetic(CosmeticType type) {
+        equippedCosmetics.remove(type);
+    }
+
     public String getEquippedCosmetic(CosmeticType type) {
         return equippedCosmetics.get(type);
     }
@@ -125,7 +147,7 @@ public class PlayerData {
     }
 
     public void setBattlePassXP(int xp) {
-        this.battlePassXP = xp;
+        this.battlePassXP = Math.max(0, xp);
     }
 
     public void addBattlePassXP(int xp) {
@@ -137,7 +159,7 @@ public class PlayerData {
     }
 
     public void setBattlePassTier(int tier) {
-        this.battlePassTier = tier;
+        this.battlePassTier = Math.max(0, tier);
     }
 
     public boolean hasPremiumBattlePass() {
@@ -171,6 +193,7 @@ public class PlayerData {
     public void resetDailyChallenges() {
         this.dailyChallengesCompleted = 0;
         this.lastDailyChallengeReset = System.currentTimeMillis();
+        this.challengeProgress.clear();
     }
 
     public int getCrateCount(CrateType type) {
@@ -181,9 +204,13 @@ public class PlayerData {
         ownedCrates.merge(type, amount, Integer::sum);
     }
 
-    public void removeCrate(CrateType type, int amount) {
+    public boolean removeCrate(CrateType type, int amount) {
         int current = ownedCrates.getOrDefault(type, 0);
-        ownedCrates.put(type, Math.max(0, current - amount));
+        if (current >= amount) {
+            ownedCrates.put(type, current - amount);
+            return true;
+        }
+        return false;
     }
 
     public Map<CrateType, Integer> getOwnedCrates() {
@@ -192,5 +219,45 @@ public class PlayerData {
 
     public void setOwnedCrates(Map<CrateType, Integer> crates) {
         this.ownedCrates = new EnumMap<>(crates);
+    }
+
+    public int getChallengeProgress(String challengeId) {
+        return challengeProgress.getOrDefault(challengeId, 0);
+    }
+
+    public void setChallengeProgress(String challengeId, int progress) {
+        challengeProgress.put(challengeId, progress);
+    }
+
+    public void addChallengeProgress(String challengeId, int amount) {
+        challengeProgress.merge(challengeId, amount, Integer::sum);
+    }
+
+    public Map<String, Integer> getAllChallengeProgress() {
+        return new HashMap<>(challengeProgress);
+    }
+
+    public long getLastSeen() {
+        return lastSeen;
+    }
+
+    public void setLastSeen(long timestamp) {
+        this.lastSeen = timestamp;
+    }
+
+    public void updateLastSeen() {
+        this.lastSeen = System.currentTimeMillis();
+    }
+
+    public long getTotalPlaytime() {
+        return totalPlaytime;
+    }
+
+    public void setTotalPlaytime(long playtime) {
+        this.totalPlaytime = playtime;
+    }
+
+    public void addPlaytime(long duration) {
+        this.totalPlaytime += duration;
     }
 }

@@ -1,10 +1,10 @@
 package dev.oumaimaa.plugin.lib;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.skeleton.Game;
 import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.config.playerdata.PlayerStatistics;
 import dev.oumaimaa.plugin.config.playerdata.database.DatabaseHandler;
+import dev.oumaimaa.plugin.skeleton.Game;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;

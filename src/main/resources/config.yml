@@ -1,6 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════╗
-# ║              KawaiiRoyale Configuration v2.0                     ║
-# ║     Modern Battle Royale Plugin with Advanced Features          ║
+# ║              KawaiiRoyale v2.0 Configuration                     ║
+# ║     PacketEvents Optimized • Fully Customizable • Advanced      ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
 # ═══════════════════ GAME MODES ═══════════════════
@@ -12,90 +12,107 @@ game-modes:
     countdown-time: 15
     allow-teams: false
 
+    queue:
+      auto-start: true
+      priority-system: true
+      vip-priority: true
+
+    gameplay:
+      respawn-enabled: false
+      kill-rewards: true
+      elimination-broadcast: true
+      final-showdown-threshold: 5
+
   resurgence:
     enabled: true
     min-players: 8
     max-players: 50
     countdown-time: 10
-    respawn-delay: 5  # seconds
-    max-respawns: -1  # -1 = unlimited
     allow-teams: true
     team-size: 3
 
+    queue:
+      auto-start: true
+      priority-system: false
+
+    gameplay:
+      respawn-enabled: true
+      respawn-delay: 5
+      max-respawns: -1
+      respawn-cooldown: 10
+      top-players-win: 3
+      kill-limit: 50
+      time-limit: 900
+
 # ═══════════════════ ZONE SETTINGS ═══════════════════
 zone:
-  # Initial zone size (radius in blocks)
   initial-size: 1000
-
-  # Final zone size (radius in blocks)
   final-size: 50
-
-  # Time between zone shrinks (seconds)
   shrink-interval: 120
-
-  # Number of shrink stages
   shrink-stages: 8
-
-  # Damage dealt per tick outside zone
   damage-per-tick: 2
-
-  # How often damage is applied (in ticks, 20 = 1 second)
   damage-interval: 20
-
-  # Warning time before zone starts shrinking (seconds)
   warning-time: 30
 
-  # Show particle border
-  show-particles: true
-  particle-density: 5  # degrees between particles
+  visual:
+    show-particles: true
+    particle-type: DUST
+    particle-density: 5
+    particle-height: 1
+    particle-color:
+      red: 255
+      green: 0
+      blue: 0
 
-  # Random center point for each game
-  random-center: true
+  algorithm: ADAPTIVE
+  adaptive:
+    enabled: true
+    speed-up-threshold: 50
+    speed-up-multiplier: 1.5
+    slow-down-threshold: 10
+    slow-down-multiplier: 0.75
 
-  # Zone shrink algorithm: LINEAR, EXPONENTIAL, ADAPTIVE
-  shrink-algorithm: ADAPTIVE
-
-# ═══════════════════ GAME TIMERS ═══════════════════
-timers:
-  # Countdown before game starts
-  countdown: 15
-
-  # Grace period before PvP and zone shrinking (seconds)
-  grace-period: 60
-
-  # Loot chest respawn time (seconds, 0 = no respawn)
-  loot-respawn: 30
-
-  # Time before cleanup after game ends
-  cleanup-delay: 10
-
-  # Spectator auto-kick time (seconds, -1 = disabled)
-  spectator-timeout: 300
+  sounds:
+    shrink-start:
+      enabled: true
+      sound: BLOCK_BEACON_ACTIVATE
+      volume: 1.0
+      pitch: 0.8
+    zone-damage:
+      enabled: true
+      sound: BLOCK_FIRE_AMBIENT
+      volume: 0.5
+      pitch: 1.0
+    warning:
+      enabled: true
+      sound: BLOCK_NOTE_BLOCK_PLING
+      volume: 1.0
+      pitch: 0.5
 
 # ═══════════════════ LOOT SYSTEM ═══════════════════
 loot:
-  # Airdrop system
   drops:
     enabled: true
-    interval: 180  # seconds between drops
+    interval: 180
     announce: true
-    announce-distance: 500  # blocks
+    announce-distance: 500
     particle-effect: true
-    smoke-duration: 60  # seconds
+    smoke-duration: 60
     items-per-drop: 5
 
-  # Chest loot
   chests:
     enabled: true
     respawn: false
+    respawn-time: 30
     glow-effect: true
-    tier-distribution:
-      common: 50    # percentage
-      rare: 30
-      epic: 15
-      legendary: 5
+    items-per-chest: 3
 
-  # Weapon tiers with damage multipliers
+  tier-distribution:
+    common: 50
+    rare: 30
+    epic: 15
+    legendary: 5
+
   weapon-tiers:
     common:
       color: "&7"
@@ -110,233 +127,289 @@ loot:
       color: "&6"
       damage-multiplier: 2.0
 
+# ═══════════════════ TIMERS ═══════════════════
+timers:
+  countdown: 15
+  grace-period: 60
+  loot-respawn: 30
+  cleanup-delay: 10
+  spectator-timeout: 300
+  parachute-duration: 10
+  combat-tag-duration: 10
+
 # ═══════════════════ FEATURES ═══════════════════
 features:
-  # Parachute system (elytra)
   parachute:
     enabled: true
     auto-remove-on-land: true
-    height-threshold: 50  # blocks
+    height-threshold: 50
+    gliding-speed-multiplier: 1.0
 
-  # Spectator mode
   spectating:
     enabled: true
     allow-teleport: true
     show-health: true
-    xray-mode: true
+    xray-mode: false
+    fly-speed: 1.0
 
-  # Replay system
-  replays:
-    enabled: true
-    save-duration: 300  # seconds
-    auto-save-wins: true
-
-  # Statistics tracking
   statistics:
     enabled: true
     track-accuracy: true
     track-weapon-kills: true
     track-distance-traveled: true
+    track-damage: true
+    track-headshots: true
 
-  # Leaderboards
   leaderboards:
     enabled: true
-    update-interval: 60  # seconds
+    update-interval: 60
     display-top: 10
+    auto-refresh: true
 
-  # Rewards system
   rewards:
     enabled: true
-    win-reward: 100
-    kill-reward: 10
-    top3-reward: 50
-    participation-reward: 5
+    use-economy: true
+    use-internal-coins: true
 
-  # Cross-play (Bedrock support)
+    battle-royale:
+      win-reward: 100
+      kill-reward: 10
+      top3-reward: 50
+      top10-reward: 25
+      participation-reward: 5
+
+    resurgence:
+      win-reward: 75
+      kill-reward: 5
+      top3-reward: 40
+      participation-reward: 5
+
+    multipliers:
+      streak-multiplier: 1.1
+      headshot-bonus: 5
+      final-kill-bonus: 20
+
+  achievements:
+    enabled: true
+    announce-unlocks: true
+    broadcast-rare: true
+    give-rewards: true
+
+  cosmetics:
+    enabled: true
+    shop-enabled: true
+    equip-in-game: false
+    preview-enabled: true
+
+  battle-pass:
+    enabled: true
+    current-season: 1
+    season-length-days: 90
+    free-track: true
+    premium-track: true
+    premium-price: 5000
+
+  challenges:
+    enabled: true
+    daily-challenges: 3
+    weekly-challenges: 1
+    auto-reset: true
+    give-rewards: true
+
+  crates:
+    enabled: true
+    purchasable: true
+    animated-opening: true
+    duplicate-protection: false
+
   crossplay:
     enabled: true
     show-platform-icons: true
     optimize-for-bedrock: true
 
-  # Party system
-  party-system:
-    enabled: true
-    max-party-size: 4
-    allow-public-parties: false
-
-  # Anti-cheat integration
   anti-cheat:
     enabled: true
     track-suspicious-kills: true
     auto-report-threshold: 5
-
-  # Custom weapons
-  custom-weapons:
-    enabled: true
-    allow-attachments: true
-    weapon-leveling: true
+    velocity-checks: true
+    reach-checks: true
 
 # ═══════════════════ MATCHMAKING ═══════════════════
 matchmaking:
-  # Skill-based matchmaking
   enabled: true
-
-  # ELO system
   use-elo: true
   starting-elo: 1000
-  elo-range: 200  # ±200 ELO for matching
+  elo-range: 200
+  elo-gain-win: 25
+  elo-loss-defeat: 15
 
-  # Priority queue for VIPs
-  vip-priority: true
+  priority:
+    vip-priority: true
+    party-priority: true
 
-  # Fill empty slots with bots
-  use-bots: false
-  bot-skill-level: "MEDIUM"  # EASY, MEDIUM, HARD, ADAPTIVE
+  bots:
+    use-bots: false
+    bot-skill-level: MEDIUM
+    min-players-for-bots: 5
+    max-bots-per-game: 20
 
 # ═══════════════════ PERFORMANCE ═══════════════════
 performance:
-  # Use async operations for I/O
   async-saves: true
   async-loads: true
 
-  # Cache settings
-  cache-enabled: true
-  cache-size: 1000
-  cache-expiry: 300  # seconds
+  cache:
+    enabled: true
+    cache-size: 1000
+    cache-expiry: 300
 
-  # World cleanup interval (seconds)
-  cleanup-interval: 300
+  cleanup:
+    cleanup-interval: 300
+    force-gc-after-game: false
 
-  # Entity optimization
-  optimize-entities: true
-  max-items-per-chunk: 50
+  optimization:
+    optimize-entities: true
+    optimize-scoreboard: true
+    optimize-bossbar: true
+    optimize-gui: true
+    optimize-particles: true
+    max-items-per-chunk: 50
 
-  # Memory management
-  force-gc-after-game: false
+  packet-events:
+    enabled: true
+    re-encode: false
+    async-packet-handling: true
+
+  database:
+    use-connection-pool: true
+    pool-size: 10
+    connection-timeout: 30
+    validation-timeout: 5
 
 # ═══════════════════ DATABASE ═══════════════════
 database:
-  # Type: sqlite, mysql, mongodb
   type: sqlite
 
-  # MySQL/MongoDB settings (ignored for SQLite)
-  host: localhost
-  port: 3306
-  database: kawaiiroyale
-  username: root
-  password: ""
+  mysql:
+    host: localhost
+    port: 3306
+    database: kawaiiroyale
+    username: root
+    password: ""
+    use-ssl: false
 
-  # Connection pool
-  pool-size: 10
-  connection-timeout: 30
+  sqlite:
+    file: data.db
 
-  # Data retention
-  keep-stats-days: 365  # -1 for forever
-  backup-interval: 86400  # seconds (24 hours)
+  backup:
+    enabled: true
+    interval: 86400
+    keep-backups: 7
+
+  retention:
+    keep-stats-days: 365
+    auto-cleanup: true
 
 # ═══════════════════ INTEGRATIONS ═══════════════════
 integrations:
-  # PlaceholderAPI
   placeholderapi:
     enabled: true
 
-  # Discord webhook notifications
+  vault:
+    enabled: true
+    use-economy: true
+
   discord:
     enabled: false
     webhook-url: ""
     notifications:
-      game-start: true
+      game-start: false
       game-end: true
       new-record: true
       player-milestone: true
+      achievements: false
 
-  # Economy integration (Vault)
-  economy:
-    enabled: false
-    use-vault: true
-
-  # Permissions (LuckPerms)
-  permissions:
-    use-luckperms: true
+  luckperms:
+    enabled: true
+    use-permissions: true
 
 # ═══════════════════ CUSTOMIZATION ═══════════════════
 customization:
-  # Server display name
   server-name: "KawaiiRoyale Server"
 
-  # Scoreboard
   scoreboard:
     enabled: true
-    update-interval: 10  # ticks
+    update-interval: 10
+    show-in-lobby: true
+    show-in-game: true
 
-  # Boss bar for zone countdown
   bossbar:
     enabled: true
     color: RED
     style: SOLID
+    show-zone-countdown: true
+    show-game-timer: true
 
-  # Title messages
   titles:
     enabled: true
     fade-in: 10
     stay: 40
     fade-out: 10
 
-  # Action bar messages
   actionbar:
     enabled: true
     show-kills: true
     show-zone-distance: true
+    show-alive-count: true
+    update-interval: 20
 
-  # Sounds
   sounds:
     enabled: true
-    volume: 1.0
-    pitch: 1.0
+    master-volume: 1.0
+    kill-sound: ENTITY_EXPERIENCE_ORB_PICKUP
+    death-sound: ENTITY_PLAYER_DEATH
+    win-sound: UI_TOAST_CHALLENGE_COMPLETE
+
+  particles:
+    enabled: true
+    kill-effect: TOTEM_OF_UNDYING
+    death-effect: SOUL
+    zone-particles: DUST
+    loot-drop-particles: FIREWORK
+
+# ═══════════════════ WORLD SETTINGS ═══════════════════
+worlds:
+  auto-create: false
+  use-custom-generator: false
+  generator: TerraformGenerator
+  border-size: 2000
+
+  pre-generation:
+    enabled: false
+    radius: 1000
+    async: true
+
+  cleanup:
+    auto-delete: false
+    backup-worlds: false
 
 # ═══════════════════ ADVANCED ═══════════════════
 advanced:
-  # Debug mode
   debug: false
   verbose-logging: false
 
-  # API settings
-  enable-api: true
-  api-version: "2.0"
+  api:
+    enable-api: true
+    api-version: "2.0"
 
-  # Experimental features
   experimental:
     ai-bots: false
     dynamic-weather: false
     environmental-hazards: false
 
-  # Update checker
-  check-updates: true
-  auto-update: false
+  updates:
+    check-updates: true
+    auto-update: false
+    update-channel: RELEASE
 
-# ═══════════════════ WORLD SETTINGS ═══════════════════
-worlds:
-  # Auto-create game worlds
-  auto-create: true
-
-  # World generator (requires TerraformGenerator)
-  use-custom-generator: true
-  generator: TerraformGenerator
-
-  # World border size
-  border-size: 2000
-
-  # Pre-generate chunks
-  pregenerate: true
-  pregenerate-radius: 1000
-
-  # Delete worlds after game
-  auto-delete: true
-
-  # Keep backups
-  backup-worlds: false
-
-# ═══════════════════════════════════════════════════════════════════
-# DO NOT MODIFY BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
-# ═══════════════════════════════════════════════════════════════════
 config-version: 2.0

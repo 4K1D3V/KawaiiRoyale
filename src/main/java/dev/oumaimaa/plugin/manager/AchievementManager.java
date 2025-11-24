@@ -1,10 +1,10 @@
 package dev.oumaimaa.plugin.manager;
 
 import dev.oumaimaa.Main;
+import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.constant.AchievementCategory;
 import dev.oumaimaa.plugin.constant.AchievementDifficulty;
 import dev.oumaimaa.plugin.constant.AchievementType;
-import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.record.Achievement;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

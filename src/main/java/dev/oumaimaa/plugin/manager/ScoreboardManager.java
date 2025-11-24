@@ -1,9 +1,9 @@
 package dev.oumaimaa.plugin.manager;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.skeleton.Game;
 import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.config.playerdata.PlayerStatistics;
+import dev.oumaimaa.plugin.skeleton.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;

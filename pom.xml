@@ -6,7 +6,7 @@
 
     <groupId>dev.oumaimaa</groupId>
     <artifactId>KawaiiRoyale</artifactId>
-    <version>1.0.1.1-FIX</version>
+    <version>1.0-REBASE</version>
     <packaging>jar</packaging>
 
     <name>KawaiiRoyale</name>
@@ -52,14 +52,6 @@
                                     <shadedPattern>dev.oumaimaa.libs.caffeine</shadedPattern>
                                 </relocation>
                             </relocations>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>com.zaxxer:HikariCP</exclude>
-                                    <exclude>com.mysql:mysql-connector-j</exclude>
-                                    <exclude>org.xerial:sqlite-jdbc</exclude>
-                                </excludes>
-                            </artifactSet>
-
                         </configuration>
                     </execution>
                 </executions>
@@ -89,12 +81,24 @@
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/releases/</url>
         </repository>
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
         </repository>
     </repositories>
 
@@ -143,6 +147,20 @@
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.51.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.retrooper</groupId>
+            <artifactId>packetevents-spigot</artifactId>
+            <version>2.10.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

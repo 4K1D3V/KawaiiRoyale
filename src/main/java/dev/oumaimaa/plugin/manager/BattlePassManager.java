@@ -1,11 +1,11 @@
 package dev.oumaimaa.plugin.manager;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.skeleton.BattlePassReward;
-import dev.oumaimaa.plugin.skeleton.BattlePassTier;
 import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.constant.RewardType;
 import dev.oumaimaa.plugin.skeleton.BattlePass;
+import dev.oumaimaa.plugin.skeleton.BattlePassReward;
+import dev.oumaimaa.plugin.skeleton.BattlePassTier;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;

@@ -1,10 +1,10 @@
 package dev.oumaimaa.plugin.gui;
 
 import dev.oumaimaa.Main;
+import dev.oumaimaa.plugin.config.playerdata.PlayerData;
+import dev.oumaimaa.plugin.constant.CrateType;
 import dev.oumaimaa.plugin.skeleton.CrateDefinition;
 import dev.oumaimaa.plugin.skeleton.CrateReward;
-import dev.oumaimaa.plugin.constant.CrateType;
-import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;

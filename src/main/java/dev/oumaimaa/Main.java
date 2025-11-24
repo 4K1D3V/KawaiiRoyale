@@ -1,38 +1,32 @@
 package dev.oumaimaa;
 
-import dev.oumaimaa.plugin.listener.AchievementListener;
-import dev.oumaimaa.plugin.manager.AchievementManager;
-import dev.oumaimaa.plugin.lib.KawaiiRoyalePlaceholder;
-import dev.oumaimaa.plugin.manager.ArenaManager;
-import dev.oumaimaa.plugin.manager.BattlePassManager;
-import dev.oumaimaa.plugin.manager.ChallengeManager;
+import com.github.retrooper.packetevents.PacketEvents;
+import dev.oumaimaa.api.API;
 import dev.oumaimaa.plugin.command.CommandManager;
 import dev.oumaimaa.plugin.config.ConfigManager;
-import dev.oumaimaa.plugin.manager.CosmeticManager;
-import dev.oumaimaa.plugin.manager.CrateManager;
-import dev.oumaimaa.plugin.manager.DisplayManager;
-import dev.oumaimaa.plugin.manager.GameManager;
-import dev.oumaimaa.plugin.gui.GUIManager;
-import dev.oumaimaa.plugin.listener.ListenerManager;
-import dev.oumaimaa.plugin.manager.LootManager;
 import dev.oumaimaa.plugin.config.playerdata.PlayerDataManager;
-import dev.oumaimaa.plugin.manager.QueueManager;
-import dev.oumaimaa.plugin.manager.ZoneManager;
+import dev.oumaimaa.plugin.gui.GUIManager;
+import dev.oumaimaa.plugin.lib.KawaiiRoyalePlaceholder;
+import dev.oumaimaa.plugin.listener.ListenerManager;
+import dev.oumaimaa.plugin.listener.packet.PacketListenerManager;
+import dev.oumaimaa.plugin.manager.*;
+import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
- * KawaiiRoyale - Advanced Battle Royale Plugin
+ * KawaiiRoyale Main Plugin Class
+ * Advanced Battle Royale with PacketEvents optimization
  *
  * @author oumaimaa
- * @version 1.0.1.1
+ * @version 2.0.0
  */
 public final class Main extends JavaPlugin {
 
     private static Main instance;
+
     private ConfigManager configManager;
     private ArenaManager arenaManager;
     private GameManager gameManager;
@@ -42,18 +36,30 @@ public final class Main extends JavaPlugin {
     private LootManager lootManager;
     private CommandManager commandManager;
     private ListenerManager listenerManager;
-    private GUIManager guiManager;
+    private PacketListenerManager packetListenerManager;
     private DisplayManager displayManager;
     private AchievementManager achievementManager;
     private CosmeticManager cosmeticManager;
     private BattlePassManager battlePassManager;
     private ChallengeManager challengeManager;
     private CrateManager crateManager;
+    private VaultManager vaultManager;
     private MiniMessage miniMessage;
     private KawaiiRoyalePlaceholder placeholderExpansion;
+    private GUIManager guiManager;
 
     public static Main getInstance() {
         return instance;
+    }
+
+    @Override
+    public void onLoad() {
+        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
+        PacketEvents.getAPI().getSettings()
+                .reEncodeByDefault(false)
+                .checkForUpdates(true)
+                .bStats(true);
+        PacketEvents.getAPI().load();
     }
 
     @Override
@@ -61,81 +67,38 @@ public final class Main extends JavaPlugin {
         instance = this;
         long startTime = System.currentTimeMillis();
 
-        logInfo("╔══════════════════════════════════════╗");
-        logInfo("║      KawaiiRoyale - Starting...      ║");
-        logInfo("╚══════════════════════════════════════╝");
+        logBanner();
+
+        PacketEvents.getAPI().init();
 
         this.miniMessage = MiniMessage.miniMessage();
 
         if (!initializeManagers()) {
-            getLogger().severe("Failed to initialize managers! Disabling plugin...");
+            getLogger().severe("Critical failure during initialization! Disabling plugin...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
+        API.initialize(this);
         registerPlaceholders();
 
         long loadTime = System.currentTimeMillis() - startTime;
-        logInfo("╔══════════════════════════════════════╗");
-        logInfo("║   KawaiiRoyale Enabled! (" + loadTime + "ms)    ║");
-        logInfo("║      Ready for epic battles!         ║");
-        logInfo("╚══════════════════════════════════════╝");
+        logSuccess(loadTime);
     }
 
     @Override
     public void onDisable() {
         logInfo("Shutting down KawaiiRoyale...");
 
-        if (crateManager != null) {
-            logInfo("Shutting down crate manager...");
-        }
+        PacketEvents.getAPI().terminate();
 
-        if (challengeManager != null) {
-            logInfo("Shutting down challenge manager...");
-        }
+        shutdownManagers();
 
-        if (battlePassManager != null) {
-            logInfo("Shutting down battle pass...");
-        }
-
-        if (cosmeticManager != null) {
-            logInfo("Shutting down cosmetic manager...");
-        }
-
-        if (achievementManager != null) {
-            logInfo("Shutting down achievement manager...");
-        }
-        if (displayManager != null) {
-            displayManager.shutdown();
-        }
-
-        if (listenerManager != null) {
-            listenerManager.shutdown();
-        }
-
-        if (gameManager != null) {
-            gameManager.shutdown();
-        }
-
-        if (queueManager != null) {
-            queueManager.shutdown();
-        }
-
-        if (playerDataManager != null) {
-            playerDataManager.shutdown();
-        }
-
-        if (arenaManager != null) {
-            arenaManager.shutdown();
-        }
-
-        logInfo("KawaiiRoyale has been disabled. Thanks for playing!");
+        logInfo("KawaiiRoyale disabled successfully. Goodbye!");
     }
 
     /**
-     * Initialize all managers
-     *
-     * @return true if successful, false otherwise
+     * Initialize all managers in correct order
      */
     private boolean initializeManagers() {
         try {
@@ -203,15 +166,85 @@ public final class Main extends JavaPlugin {
     }
 
     /**
-     * Register PlaceholderAPI expansion if available
+     * Shutdown all managers in reverse order
+     */
+    private void shutdownManagers() {
+        if (packetListenerManager != null) {
+            logInfo("Unregistering packet listeners...");
+            packetListenerManager.shutdown();
+        }
+
+        if (listenerManager != null) {
+            logInfo("Unregistering event listeners...");
+            listenerManager.shutdown();
+        }
+
+        if (crateManager != null) {
+            logInfo("Shutting down crate manager...");
+        }
+
+        if (challengeManager != null) {
+            logInfo("Shutting down challenge manager...");
+        }
+
+        if (battlePassManager != null) {
+            logInfo("Shutting down battle pass...");
+        }
+
+        if (cosmeticManager != null) {
+            logInfo("Shutting down cosmetic manager...");
+        }
+
+        if (achievementManager != null) {
+            logInfo("Shutting down achievement manager...");
+        }
+
+        if (displayManager != null) {
+            displayManager.shutdown();
+        }
+
+        if (gameManager != null) {
+            gameManager.shutdown();
+        }
+
+        if (queueManager != null) {
+            queueManager.shutdown();
+        }
+
+        if (playerDataManager != null) {
+            playerDataManager.shutdown();
+        }
+
+        if (arenaManager != null) {
+            arenaManager.shutdown();
+        }
+    }
+
+    /**
+     * Register PlaceholderAPI if available
      */
     private void registerPlaceholders() {
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             logInfo("Hooking into PlaceholderAPI...");
             this.placeholderExpansion = new KawaiiRoyalePlaceholder(this);
-            placeholderExpansion.register();
-            logInfo("PlaceholderAPI integration enabled!");
+            if (placeholderExpansion.register()) {
+                logInfo("PlaceholderAPI integration enabled!");
+            }
         }
+    }
+
+    private void logBanner() {
+        logInfo("╔══════════════════════════════════════╗");
+        logInfo("║    KawaiiRoyale v2.0 - Starting...   ║");
+        logInfo("║   PacketEvents • Vault • Advanced    ║");
+        logInfo("╚══════════════════════════════════════╝");
+    }
+
+    private void logSuccess(long loadTime) {
+        logInfo("╔══════════════════════════════════════╗");
+        logInfo("║   KawaiiRoyale Enabled! (" + loadTime + "ms)    ║");
+        logInfo("║     Ready for epic battles! 🎮       ║");
+        logInfo("╚══════════════════════════════════════╝");
     }
 
     public void logInfo(String message) {
@@ -258,10 +291,6 @@ public final class Main extends JavaPlugin {
         return miniMessage;
     }
 
-    public GUIManager getGuiManager() {
-        return guiManager;
-    }
-
     public DisplayManager getDisplayManager() {
         return displayManager;
     }
@@ -286,4 +315,15 @@ public final class Main extends JavaPlugin {
         return crateManager;
     }
 
+    public VaultManager getVaultManager() {
+        return vaultManager;
+    }
+
+    public PacketListenerManager getPacketListenerManager() {
+        return packetListenerManager;
+    }
+
+    public GUIManager getGuiManager() {
+        return guiManager;
+    }
 }

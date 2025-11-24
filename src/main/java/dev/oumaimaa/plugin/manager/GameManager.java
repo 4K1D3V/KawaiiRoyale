@@ -4,8 +4,8 @@ import dev.oumaimaa.Main;
 import dev.oumaimaa.plugin.constant.GameMode;
 import dev.oumaimaa.plugin.constant.GameState;
 import dev.oumaimaa.plugin.skeleton.Arena;
-import dev.oumaimaa.plugin.skeleton.GamePlayer;
 import dev.oumaimaa.plugin.skeleton.Game;
+import dev.oumaimaa.plugin.skeleton.GamePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

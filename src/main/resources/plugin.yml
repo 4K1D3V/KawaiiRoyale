@@ -12,6 +12,7 @@ softdepend:
   - LuckPerms
   - Vault
   - TerraformGenerator
+  - PacketEvents
 
 # Permissions
 permissions:

@@ -1,8 +1,8 @@
 package dev.oumaimaa.plugin.gui;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.skeleton.Challenge;
 import dev.oumaimaa.plugin.config.playerdata.PlayerData;
+import dev.oumaimaa.plugin.skeleton.Challenge;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;

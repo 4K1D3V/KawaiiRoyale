@@ -1,13 +1,13 @@
 package dev.oumaimaa.plugin.manager;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.task.CrateOpeningAnimation;
-import dev.oumaimaa.plugin.skeleton.CrateReward;
+import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.constant.CrateType;
 import dev.oumaimaa.plugin.constant.RewardItemType;
 import dev.oumaimaa.plugin.record.Cosmetic;
-import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.skeleton.CrateDefinition;
+import dev.oumaimaa.plugin.skeleton.CrateReward;
+import dev.oumaimaa.plugin.task.CrateOpeningAnimation;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;

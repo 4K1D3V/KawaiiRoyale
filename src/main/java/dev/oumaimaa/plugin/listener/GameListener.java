@@ -1,12 +1,12 @@
 package dev.oumaimaa.plugin.listener;
 
 import dev.oumaimaa.Main;
+import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.constant.AchievementType;
 import dev.oumaimaa.plugin.constant.ChallengeType;
 import dev.oumaimaa.plugin.constant.CrateType;
 import dev.oumaimaa.plugin.skeleton.Game;
 import dev.oumaimaa.plugin.skeleton.GamePlayer;
-import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;

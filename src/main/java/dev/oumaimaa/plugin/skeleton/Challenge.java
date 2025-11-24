@@ -2,8 +2,8 @@ package dev.oumaimaa.plugin.skeleton;
 
 import dev.oumaimaa.plugin.constant.ChallengeDifficulty;
 import dev.oumaimaa.plugin.constant.ChallengeFrequency;
-import dev.oumaimaa.plugin.record.ChallengeTemplate;
 import dev.oumaimaa.plugin.constant.ChallengeType;
+import dev.oumaimaa.plugin.record.ChallengeTemplate;
 
 /**
  * Active challenge instance

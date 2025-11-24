@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Advanced configuration manager with hot-reloading support
+ * Advanced configuration manager with hot-reload support
  */
 public class ConfigManager {
 
@@ -19,6 +19,7 @@ public class ConfigManager {
     private static final String ARENAS_YML = "arenas.yml";
     private static final String LOOT_YML = "loot.yml";
     private static final String ZONES_YML = "zones.yml";
+
     private final Main plugin;
     private final Map<String, FileConfiguration> configs;
     private final Map<String, File> configFiles;
@@ -34,7 +35,6 @@ public class ConfigManager {
      */
     public boolean load() {
         try {
-
             if (!plugin.getDataFolder().exists()) {
                 plugin.getDataFolder().mkdirs();
             }
@@ -55,7 +55,7 @@ public class ConfigManager {
     }
 
     /**
-     * Load a specific configuration file
+     * Load specific configuration file
      */
     private void loadConfig(String fileName) {
         File file = new File(plugin.getDataFolder(), fileName);
@@ -70,15 +70,16 @@ public class ConfigManager {
     }
 
     /**
-     * Reload all configuration files
+     * Reload all configurations
      */
     public void reload() {
         configs.clear();
         load();
+        plugin.logInfo("Configuration reloaded successfully!");
     }
 
     /**
-     * Save a specific configuration file
+     * Save specific configuration
      */
     public void save(String fileName) {
         try {
@@ -92,44 +93,26 @@ public class ConfigManager {
         }
     }
 
-    /**
-     * Get a configuration file
-     */
     public FileConfiguration getConfig(String fileName) {
         return configs.getOrDefault(fileName, null);
     }
 
-    /**
-     * Get main config
-     */
     public FileConfiguration getMainConfig() {
         return getConfig(CONFIG_YML);
     }
 
-    /**
-     * Get messages config
-     */
     public FileConfiguration getMessagesConfig() {
         return getConfig(MESSAGES_YML);
     }
 
-    /**
-     * Get arenas config
-     */
     public FileConfiguration getArenasConfig() {
         return getConfig(ARENAS_YML);
     }
 
-    /**
-     * Get loot config
-     */
     public FileConfiguration getLootConfig() {
         return getConfig(LOOT_YML);
     }
 
-    /**
-     * Get zones config
-     */
     public FileConfiguration getZonesConfig() {
         return getConfig(ZONES_YML);
     }
@@ -183,19 +166,31 @@ public class ConfigManager {
     }
 
     public boolean isParachuteEnabled() {
-        return getMainConfig().getBoolean("features.parachute", true);
+        return getMainConfig().getBoolean("features.parachute.enabled", true);
     }
 
     public boolean isSpectatingEnabled() {
-        return getMainConfig().getBoolean("features.spectating", true);
+        return getMainConfig().getBoolean("features.spectating.enabled", true);
     }
 
     public boolean isRewardsEnabled() {
         return getMainConfig().getBoolean("features.rewards.enabled", true);
     }
 
-    public boolean isCrossplayEnabled() {
-        return getMainConfig().getBoolean("features.crossplay", true);
+    public boolean useEconomy() {
+        return getMainConfig().getBoolean("features.rewards.use-economy", true);
+    }
+
+    public boolean useInternalCoins() {
+        return getMainConfig().getBoolean("features.rewards.use-internal-coins", true);
+    }
+
+    public int getWinReward(String mode) {
+        return getMainConfig().getInt("features.rewards." + mode + ".win-reward", 100);
+    }
+
+    public int getKillReward(String mode) {
+        return getMainConfig().getInt("features.rewards." + mode + ".kill-reward", 10);
     }
 
     public String getDatabaseType() {
@@ -203,22 +198,22 @@ public class ConfigManager {
     }
 
     public String getDatabaseHost() {
-        return getMainConfig().getString("database.host", "localhost");
+        return getMainConfig().getString("database.mysql.host", "localhost");
     }
 
     public int getDatabasePort() {
-        return getMainConfig().getInt("database.port", 3306);
+        return getMainConfig().getInt("database.mysql.port", 3306);
     }
 
     public String getDatabaseName() {
-        return getMainConfig().getString("database.database", "kawaiiroyale");
+        return getMainConfig().getString("database.mysql.database", "kawaiiroyale");
     }
 
     public String getDatabaseUser() {
-        return getMainConfig().getString("database.username", "root");
+        return getMainConfig().getString("database.mysql.username", "root");
     }
 
     public String getDatabasePassword() {
-        return getMainConfig().getString("database.password", "");
+        return getMainConfig().getString("database.mysql.password", "");
     }
 }

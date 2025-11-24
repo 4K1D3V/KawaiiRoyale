@@ -1,11 +1,11 @@
 package dev.oumaimaa.plugin.manager;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.record.ChallengeTemplate;
 import dev.oumaimaa.plugin.config.playerdata.PlayerData;
 import dev.oumaimaa.plugin.constant.ChallengeDifficulty;
 import dev.oumaimaa.plugin.constant.ChallengeFrequency;
 import dev.oumaimaa.plugin.constant.ChallengeType;
+import dev.oumaimaa.plugin.record.ChallengeTemplate;
 import dev.oumaimaa.plugin.skeleton.Challenge;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

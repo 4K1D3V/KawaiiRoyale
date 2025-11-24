@@ -1,8 +1,8 @@
 package dev.oumaimaa.plugin.task;
 
 import dev.oumaimaa.Main;
-import dev.oumaimaa.plugin.skeleton.CrateReward;
 import dev.oumaimaa.plugin.skeleton.CrateDefinition;
+import dev.oumaimaa.plugin.skeleton.CrateReward;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.title.Title;

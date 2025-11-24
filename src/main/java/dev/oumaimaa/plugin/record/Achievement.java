@@ -1,10 +1,10 @@
 package dev.oumaimaa.plugin.record;
 
+import dev.oumaimaa.plugin.config.playerdata.PlayerData;
+import dev.oumaimaa.plugin.config.playerdata.PlayerStatistics;
 import dev.oumaimaa.plugin.constant.AchievementCategory;
 import dev.oumaimaa.plugin.constant.AchievementDifficulty;
 import dev.oumaimaa.plugin.constant.AchievementType;
-import dev.oumaimaa.plugin.config.playerdata.PlayerData;
-import dev.oumaimaa.plugin.config.playerdata.PlayerStatistics;
 import org.jetbrains.annotations.NotNull;
 
 /**
